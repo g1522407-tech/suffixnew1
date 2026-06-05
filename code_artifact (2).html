@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 5 品詞クイズ｜島端メソッド PRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe6;
+    --paper-2:#ece5d8;
+    --ink:#26211c;
+    --ink-soft:#5b5247;
+    --line:#d8cfbe;
+    --accent:#c0492e;       /* terracotta */
+    --accent-deep:#9a3520;
+    --good:#3f6b4a;
+    --good-bg:#e3ecdf;
+    --bad:#b23a2e;
+    --bad-bg:#f3ddd7;
+    --navy:#1f2a37;
+    --gold:#b8862f;
+    --shadow:0 18px 40px -22px rgba(31,26,20,.55);
+    --jp:"Zen Kaku Gothic New",sans-serif;
+    --mincho:"Shippori Mincho B1",serif;
+    --en:"Fraunces",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{background:var(--paper);color:var(--ink);font-family:var(--jp);scroll-behavior:smooth}
+  body{
+    min-height:100vh;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(192,73,46,.06), transparent 40%),
+      radial-gradient(circle at 88% 82%, rgba(31,42,55,.06), transparent 42%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+    display:flex;justify-content:center;
+    padding:18px 14px 40px;
+  }
+  .wrap{width:100%;max-width:620px;position:relative}
+
+  /* Utility Buttons (Floating Sound and Sheet) */
+  .control-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .utility-btn {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-family: var(--jp);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .utility-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent-deep);
+    background: #fff;
+  }
+  .utility-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+
+  /* Header */
+  header{text-align:center;margin:4px 0 22px}
+  .brand{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--jp);font-weight:700;font-size:.72rem;letter-spacing:.22em;
+    color:var(--accent-deep);text-transform:uppercase;
+    border:1px solid var(--line);border-radius:100px;padding:6px 16px;background:rgba(255,255,255,.4)
+  }
+  .brand b{color:var(--ink)}
+  h1{
+    font-family:var(--mincho);font-weight:800;line-height:1.2;
+    font-size:clamp(1.6rem,6vw,2.3rem);margin:14px 0 6px;letter-spacing:.01em
+  }
+  h1 .en{font-family:var(--en);font-style:normal;color:var(--accent);display:block;font-size:.62em;letter-spacing:.04em;margin-top:2px}
+  .sub{color:var(--ink-soft);font-size:.88rem;font-weight:500;line-height:1.4}
+
+  /* Card */
+  .card{
+    background:linear-gradient(180deg,#fffdf8,#f7f1e6);
+    border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+    padding:24px 22px 26px;position:relative;overflow:hidden
+  }
+  .card::before{content:"";position:absolute;inset:0;border-radius:20px;border-top:3px solid var(--accent);opacity:.9;pointer-events:none}
+
+  /* Start screen */
+  .lead{font-size:.95rem;color:var(--ink-soft);line-height:1.7;margin-bottom:18px}
+  .rules{background:var(--paper-2);border:1px dashed var(--line);border-radius:14px;padding:14px 18px;margin-bottom:20px}
+  .rules h3{font-family:var(--mincho);font-size:0.95rem;margin-bottom:8px;color:var(--navy)}
+  .rules ol{margin:0;padding-left:1.2em;color:var(--ink-soft);font-size:.85rem;line-height:1.8}
+  .rules ol b{color:var(--accent-deep)}
+  .modes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+  .mode-btn{
+    font-family:var(--jp);font-weight:700;font-size:.92rem;cursor:pointer;
+    border:1.5px solid var(--line);background:#fff;color:var(--ink);
+    border-radius:14px;padding:14px 12px;transition:.18s;text-align:left;line-height:1.3;
+    position: relative;
+  }
+  .mode-btn span{display:block;font-size:.7rem;font-weight:500;color:var(--ink-soft);margin-top:3px}
+  .mode-btn:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow: 0 4px 12px rgba(0,0,0,0.06);}
+  .mode-btn.full{grid-column:1/-1;background:var(--navy);color:#fff;border-color:var(--navy)}
+  .mode-btn.full span{color:#cdd5de}
+  .mode-btn.full:hover{background:#16202b}
+  
+  .mode-btn.starred-btn {
+    grid-column: 1/-1;
+    background: #fff;
+    border-color: var(--gold);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mode-btn.starred-btn:hover {
+    background: #fffdf2;
+    border-color: var(--gold);
+  }
+  .mode-btn.starred-btn .star-count {
+    background: var(--gold);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+
+  /* Quiz */
+  .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-size:.8rem;color:var(--ink-soft);font-weight:700}
+  .pill{background:var(--paper-2);border:1px solid var(--line);border-radius:100px;padding:4px 12px;letter-spacing:.04em}
+  .pill .cat{color:var(--accent-deep)}
+  .progress{height:6px;background:var(--paper-2);border-radius:100px;overflow:hidden;margin-bottom:20px;border:1px solid var(--line)}
+  .progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:100px;transition:width .4s}
+
+  .question-container {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(216, 207, 190, 0.5);
+    position: relative;
+  }
+  .qnum-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .qnum{font-family:var(--en);font-size:.85rem;color:var(--accent);letter-spacing:.12em;font-weight:600}
+  
+  .q-actions {
+    display: flex;
+    gap: 12px;
+  }
+  .action-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ink-soft);
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s, color 0.15s;
+    border-radius: 50%;
+  }
+  .action-icon:hover {
+    transform: scale(1.15);
+    background: rgba(0,0,0,0.03);
+  }
+  .action-icon.tts-btn:hover { color: var(--accent); }
+  .action-icon.star-btn { color: var(--line); }
+  .action-icon.star-btn.starred { color: var(--gold); }
+  
+  .sentence{font-size:1.15rem;line-height:1.75;font-weight:500;margin-bottom:12px;color:var(--ink);font-family:var(--jp)}
+  .sentence .blank{display:inline-block;min-width:78px;border-bottom:2.5px solid var(--accent);text-align:center;color:var(--accent);font-weight:900;vertical-align:bottom;margin:0 2px}
+  .jp-hint{font-size:.84rem;color:var(--ink-soft);font-weight:500;line-height:1.5}
+
+  .options{display:grid;gap:10px}
+  .opt{
+    display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;
+    border:1.5px solid var(--line);background:#fff;border-radius:13px;padding:13px 16px;
+    font-family:var(--en);font-size:1.02rem;font-weight:500;color:var(--ink);transition:.15s;width:100%;
+    min-height: 52px;
+  }
+  .opt .key{
+    font-family:var(--jp);font-weight:900;font-size:.8rem;width:24px;height:24px;flex:none;
+    display:grid;place-items:center;border-radius:7px;background:var(--paper-2);color:var(--ink-soft);transition:.15s
+  }
+  .opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(3px);box-shadow: 0 2px 8px rgba(0,0,0,0.04);}
+  .opt:disabled{cursor:default}
+  .opt.correct{background:var(--good-bg);border-color:var(--good);color:var(--good)}
+  .opt.correct .key{background:var(--good);color:#fff}
+  .opt.wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+  .opt.wrong .key{background:var(--bad);color:#fff}
+  .opt.dim{opacity:.4}
+  .mark{margin-left:auto;font-weight:900;font-family:var(--jp);font-size:1.2rem}
+
+  /* Explanation */
+  .explain{margin-top:18px;border-radius:14px;overflow:hidden;border:1px solid var(--line);display:none;animation:rise .35s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .explain .head{padding:11px 16px;font-weight:900;font-size:.9rem;display:flex;align-items:center;gap:8px}
+  .explain.ok .head{background:var(--good);color:#fff}
+  .explain.ng .head{background:var(--bad);color:#fff}
+  .explain .body{background:#fffdf8;padding:16px}
+  .ex-row{display:flex;gap:10px;font-size:.88rem;line-height:1.6;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .ex-row:last-child{border:none}
+  .ex-row .lbl{flex:none;width:74px;font-weight:900;color:var(--accent-deep);font-size:.78rem;padding-top:1px}
+  .ex-row .val{color:var(--ink);font-weight:500;flex:1}
+  .ex-row .val .suf{font-family:var(--en);background:var(--paper-2);border:1px solid var(--line);border-radius:6px;padding:1px 8px;font-weight:600;color:var(--accent-deep)}
+
+  .next{
+    margin-top:18px;width:100%;cursor:pointer;border:none;border-radius:13px;
+    background:var(--navy);color:#fff;font-family:var(--jp);font-weight:700;font-size:1rem;
+    padding:15px;transition:.18s;display:none;letter-spacing:.05em;text-align:center;
+  }
+  .next:hover{background:#16202b}
+
+  /* Result */
+  .result{text-align:center}
+  .score-ring{width:140px;height:140px;margin:6px auto 18px;position:relative}
+  .score-ring svg{transform:rotate(-90deg)}
+  .score-ring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .score-ring .num b{font-family:var(--en);font-size:2.4rem;font-weight:600;color:var(--ink);line-height:1}
+  .score-ring .num small{font-size:.72rem;color:var(--ink-soft);font-weight:700;letter-spacing:.1em;margin-top:4px}
+  .verdict{font-family:var(--mincho);font-size:1.35rem;font-weight:800;margin-bottom:6px}
+  .verdict-sub{color:var(--ink-soft);font-size:.9rem;margin-bottom:22px;line-height:1.7;padding:0 10px}
+  .breakdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:22px}
+  .bd{background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:12px 6px}
+  .bd .c{font-family:var(--mincho);font-size:.92rem;font-weight:700;color:var(--navy)}
+  .bd .s{font-family:var(--en);font-size:1.1rem;font-weight:600;color:var(--accent-deep);margin-top:4px}
+  .review{text-align:left;margin-bottom:20px}
+  .review h3{font-family:var(--mincho);font-size:1rem;margin-bottom:10px;border-left:3px solid var(--accent);padding-left:8px}
+  .miss{background:#fffdf8;border:1px solid var(--line);border-left:3px solid var(--bad);border-radius:10px;padding:12px 14px;margin-bottom:8px;font-size:.85rem;line-height:1.6}
+  .miss .q{color:var(--ink-soft);margin-bottom:4px}
+  .miss .ans{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px}
+  .miss .ans b{color:var(--good)}
+  .miss .ans s{color:var(--bad)}
+  .allgood{text-align:center;color:var(--good);font-weight:700;padding:20px 10px;font-size:.95rem;background:var(--good-bg);border-radius:12px}
+
+  .btn-row{display:flex;gap:10px}
+  .btn-row button{flex:1;cursor:pointer;border-radius:13px;padding:14px;font-family:var(--jp);font-weight:700;font-size:.95rem;transition:.18s}
+  .btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--accent)}
+  .btn-fill{background:var(--accent);border:1px solid var(--accent);color:#fff}
+  .btn-fill:hover{background:var(--accent-deep)}
+
+  /* Modal Sheet (接尾辞マスターシート) */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(31,26,20,0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 16px;
+  }
+  .modal.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modal-content {
+    background: #fffdf9;
+    width: 100%;
+    max-width: 560px;
+    max-height: 85vh;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+  }
+  .modal.active .modal-content {
+    transform: translateY(0);
+  }
+  .modal-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-header h2 {
+    font-family: var(--mincho);
+    font-size: 1.15rem;
+    font-weight: 800;
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    transition: color 0.2s;
+  }
+  .modal-close:hover {
+    color: #fff;
+  }
+  .modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .sheet-section {
+    margin-bottom: 24px;
+  }
+  .sheet-section:last-child {
+    margin-bottom: 0;
+  }
+  .sheet-title {
+    font-family: var(--mincho);
+    font-weight: 800;
+    color: var(--accent-deep);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  @media(max-width: 480px) {
+    .sheet-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .sheet-item {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  .sheet-item .suf-tag {
+    font-family: var(--en);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .sheet-item .suf-desc {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin: 2px 0 4px;
+  }
+  .sheet-item .suf-ex {
+    font-size: 0.8rem;
+    color: var(--accent-deep);
+    font-weight: 700;
+  }
+
+  footer{text-align:center;margin-top:24px;font-size:.74rem;color:var(--ink-soft);letter-spacing:.05em;line-height:1.5}
+  footer b{font-family:var(--mincho);color:var(--ink)}
+  .hide{display:none}
+
+  /* Audio Toast styling */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--navy);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    z-index: 2000;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .toast.active {
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- Controls Panel (Sound & Cheat sheet togglers) -->
+  <div class="control-panel">
+    <button class="utility-btn" id="toggleSound">
+      <svg id="soundOnIcon" viewBox="0 0 24 24"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.01,19.86 21,16.28 21,12C21,7.72 18.01,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg>
+      <svg id="soundOffIcon" class="hide" viewBox="0 0 24 24"><path d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.44 16.63,19.78 17.68,18.9L20.73,21.95L22,20.68M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18.01,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.48,12.43 16.5,12.22 16.5,12Z"/></svg>
+      <span id="soundText">音ON</span>
+    </button>
+    <button class="utility-btn" id="openSheet">
+      <svg viewBox="0 0 24 24"><path d="M19 2H5C3.9 2 3 2.9 3 4V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V4C21 2.9 20.1 2 19 2M19 20H5V4H19V20M17 11H7V9H17V11M17 15H7V13H17V15M14 19H7V17H14V19Z"/></svg>
+      <span>接尾辞一覧シート</span>
+    </button>
+  </div>
+
+  <header>
+    <div class="brand"><b>島端メソッド PRO</b></div>
+    <h1>品詞 即断トレーニング<span class="en">TOEIC Part 5 · Word Forms</span></h1>
+    <div class="sub">接尾辞で品詞を見抜く ― 音声読み上げ & ブックマーク機能付き</div>
+  </header>
+
+  <!-- START -->
+  <section id="start" class="card">
+    <p class="lead">空所の前後を見て「どの品詞が要るか」を判断し、<b>接尾辞</b>で正解を一発で選ぶ練習です。完全連動の全24問。</p>
+    <div class="rules">
+      <h3>解法の鉄則</h3>
+      <ol>
+        <li>空欄前後の<b>品詞環境</b>を確認（冠詞・前置詞・動詞 など）</li>
+        <li>必要な<b>品詞</b>を絞り込む</li>
+        <li><b>接尾辞</b>で品詞を即判断 → 正解を選ぶ</li>
+      </ol>
+    </div>
+    <div class="modes" id="modesContainer">
+      <button class="mode-btn full" data-mode="all">全部やる（24問）<span>名詞・動詞・形容詞・副詞ミックス</span></button>
+      <button class="mode-btn" data-mode="名詞">名詞 -tion / -ment 系<span>7問</span></button>
+      <button class="mode-btn" data-mode="動詞">動詞 -ize / -ate 系<span>5問</span></button>
+      <button class="mode-btn" data-mode="形容詞">形容詞 -ive / -al 系<span>6問</span></button>
+      <button class="mode-btn" data-mode="副詞">副詞 -ly / -wise 系<span>6問</span></button>
+      <button class="mode-btn starred-btn hide" id="starredModeBtn" data-mode="starred">
+        <span>⭐ ブックマーク問題のみを解く</span>
+        <span class="star-count" id="starCountLabel">0</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="card hide">
+    <div class="topbar">
+      <span class="pill">品詞 ▸ <span class="cat" id="cat">名詞</span></span>
+      <span class="pill" id="counter">1 / 24</span>
+    </div>
+    <div class="progress"><i id="bar" style="width:0%"></i></div>
+    
+    <div class="question-container">
+      <div class="qnum-row">
+        <div class="qnum" id="qnum">QUESTION 01</div>
+        <div class="q-actions">
+          <button class="action-icon tts-btn" id="speakBtn" title="音声読み上げ">
+            <svg style="width:20px;height:20px" viewBox="0 0 24 24"><path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.01,19.86 21,16.28 21,12C21,7.72 18.01,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.77 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg>
+          </button>
+          <button class="action-icon star-btn" id="starBtn" title="お気に入り登録">
+            <svg style="width:20px;height:20px" viewBox="0 0 24 24"><path fill="currentColor" d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="sentence" id="sentence"></div>
+      <div class="jp-hint" id="jphint"></div>
+    </div>
+    
+    <div class="options" id="options"></div>
+
+    <div class="explain" id="explain">
+      <div class="head" id="exhead"></div>
+      <div class="body">
+        <div class="ex-row"><span class="lbl">① 環境</span><span class="val" id="exenv"></span></div>
+        <div class="ex-row"><span class="lbl">② 必要品詞</span><span class="val" id="expos"></span></div>
+        <div class="ex-row"><span class="lbl">③ 接尾辞</span><span class="val" id="exsuf"></span></div>
+        <div class="ex-row"><span class="lbl">正解の意味</span><span class="val" id="exmean"></span></div>
+      </div>
+    </div>
+    <button class="next" id="next">次の問題 →</button>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="card hide result">
+    <div class="score-ring">
+      <svg width="140" height="140" viewBox="0 0 140 140">
+        <circle cx="70" cy="70" r="62" fill="none" stroke="#d8cfbe" stroke-width="10"/>
+        <circle id="ring" cx="70" cy="70" r="62" fill="none" stroke="#c0492e" stroke-width="10" stroke-linecap="round" stroke-dasharray="389.6" stroke-dashoffset="389.6"/>
+      </svg>
+      <div class="num"><b id="scoreNum">0</b><small id="scorePct">0%</small></div>
+    </div>
+    <div class="verdict" id="verdict"></div>
+    <div class="verdict-sub" id="verdictSub"></div>
+    <div class="breakdown" id="breakdown"></div>
+    <div class="review" id="review"></div>
+    <div class="btn-row">
+      <button class="btn-ghost" id="home">モード選択へ</button>
+      <button class="btn-fill" id="retry">もう一度</button>
+    </div>
+  </section>
+
+  <footer>© <b>島端メソッド PRO</b> ― TOEIC Part 5 接尾辞マスターシート 連動教材</footer>
+</div>
+
+<!-- POPUP MODAL (接尾辞マスターシート) -->
+<div class="modal" id="sheetModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>接尾辞マスターシート</h2>
+      <button class="modal-close" id="closeSheet">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="sheet-section">
+        <div class="sheet-title"><span>名詞の目印 (Noun Suffixes)</span></div>
+        <div class="sheet-grid">
+          <div class="sheet-item">
+            <span class="suf-tag">-ness</span>
+            <span class="suf-desc">性質・状態を表す</span>
+            <span class="suf-ex">effectiveness, kindness</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-ity</span>
+            <span class="suf-desc">状態・程度・度合い</span>
+            <span class="suf-ex">availability, security</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-tion / -sion</span>
+            <span class="suf-desc">動作・行為・結果</span>
+            <span class="suf-ex">production, decision</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-ment</span>
+            <span class="suf-desc">動作の結果・状態・手段</span>
+            <span class="suf-ex">agreement, management</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-ance / -ence</span>
+            <span class="suf-desc">行為・状態・性質</span>
+            <span class="suf-ex">assistance, difference</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-ery / -ry</span>
+            <span class="suf-desc">行為・業界・場所・全体</span>
+            <span class="suf-ex">delivery, machinery</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title"><span>動詞の目印 (Verb Suffixes)</span></div>
+        <div class="sheet-grid">
+          <div class="sheet-item">
+            <span class="suf-tag">-ify / -fy</span>
+            <span class="suf-desc">〜にする、〜化する</span>
+            <span class="suf-ex">simplify, clarify</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-ate</span>
+            <span class="suf-desc">〜する、行う</span>
+            <span class="suf-ex">evaluate, create</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-en</span>
+            <span class="suf-desc">〜にする、〜になる</span>
+            <span class="suf-ex">strengthen, broaden</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-ize / -ise</span>
+            <span class="suf-desc">〜化する、〜にする</span>
+            <span class="suf-ex">organize, realize</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title"><span>形容詞の目印 (Adjective Suffixes)</span></div>
+        <div class="sheet-grid">
+          <div class="sheet-item">
+            <span class="suf-tag">-ful</span>
+            <span class="suf-desc">〜に満ちた、〜がある</span>
+            <span class="suf-ex">useful, powerful</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-ive</span>
+            <span class="suf-desc">〜の性質を持つ、〜を伴う</span>
+            <span class="suf-ex">effective, extensive</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-al / -ical</span>
+            <span class="suf-desc">〜に関する、〜の性質の</span>
+            <span class="suf-ex">professional, critical</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-able / -ible</span>
+            <span class="suf-desc">〜できる、値する</span>
+            <span class="suf-ex">reliable, flexible</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheet-section">
+        <div class="sheet-title"><span>副詞の目印 (Adverb Suffixes)</span></div>
+        <div class="sheet-grid">
+          <div class="sheet-item">
+            <span class="suf-tag">-ly</span>
+            <span class="suf-desc">〜のように、〜の方法で</span>
+            <span class="suf-ex">significantly, effectively</span>
+          </div>
+          <div class="sheet-item">
+            <span class="suf-tag">-wise</span>
+            <span class="suf-desc">方向、方法、〜に関して</span>
+            <span class="suf-ex">otherwise, clockwise</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast">音声読み上げを開始します...</div>
+
+<script>
+const QUESTIONS = [
+  /* ===== 名詞 (7) ===== */
+  {cat:"名詞", sentence:"The manager praised the team's ____ on the latest project.",
+   jp:"マネージャーはチームのプロジェクトでの成果を称賛した。",
+   opts:["effect","effective","effectively","effectiveness"], ans:3,
+   env:"所有格 the team's の直後で、前置詞 on の前。名詞が入る位置。",
+   pos:"名詞（性質・状態）", suf:"-ness", meaning:"effectiveness ＝ 有効性・効果のほど"},
+
+  {cat:"名詞", sentence:"Please confirm the ____ of the conference room before the meeting.",
+   jp:"会議の前に会議室の空き状況を確認してください。",
+   opts:["available","availably","availability","avail"], ans:2,
+   env:"冠詞 the の後、前置詞 of の前 → 名詞の位置。",
+   pos:"名詞（性質・程度）", suf:"-ity", meaning:"availability ＝ 利用可能性・空き状況"},
+
+  {cat:"名詞", sentence:"The ____ of the new model exceeded the company's expectations.",
+   jp:"新モデルの生産量は会社の予想を上回った。",
+   opts:["produce","productive","production","productively"], ans:2,
+   env:"文頭の主語。The ____ of … と続くので名詞。",
+   pos:"名詞（行為・結果）", suf:"-tion", meaning:"production ＝ 生産・生産量"},
+
+  {cat:"名詞", sentence:"The board has not reached an ____ on the merger yet.",
+   jp:"取締役会はまだ合併について合意に至っていない。",
+   opts:["agree","agreed","agreement","agreeable"], ans:2,
+   env:"冠詞 an の直後 → 名詞が必要。",
+   pos:"名詞（行為・結果）", suf:"-ment", meaning:"agreement ＝ 合意・契約"},
+
+  {cat:"名詞", sentence:"We truly appreciate your ____ during the system upgrade.",
+   jp:"システム更新中のご支援に心より感謝します。",
+   opts:["assist","assisted","assistance","assisting"], ans:2,
+   env:"所有格 your の後ろ → 名詞。動名詞 assisting は your の後に不自然。",
+   pos:"名詞（行為・状態）", suf:"-ance", meaning:"assistance ＝ 支援・援助"},
+
+  {cat:"名詞", sentence:"The online store guarantees fast ____ on all domestic orders.",
+   jp:"そのオンラインストアは国内注文すべてに迅速な配送を保証する。",
+   opts:["deliver","delivers","delivery","delivered"], ans:2,
+   env:"形容詞 fast の後ろで動詞 guarantees の目的語 → 名詞。",
+   pos:"名詞（行為）", suf:"-ery / -ry", meaning:"delivery ＝ 配送・配達"},
+
+  {cat:"名詞", sentence:"Strong ____ between departments improved overall efficiency.",
+   jp:"部署間の強い連携が全体の効率を高めた。",
+   opts:["communicate","communicative","communication","communicatively"], ans:2,
+   env:"形容詞 Strong の後ろで文の主語 → 名詞。",
+   pos:"名詞（行為・状態）", suf:"-tion", meaning:"communication ＝ 意思疎通・連携"},
+
+  /* ===== 動詞 (5) ===== */
+  {cat:"動詞", sentence:"The new system will ____ the entire approval process.",
+   jp:"新システムは承認プロセス全体を簡素化する。",
+   opts:["simple","simply","simplify","simplification"], ans:2,
+   env:"助動詞 will の後ろ → 動詞の原形が必要。",
+   pos:"動詞（〜にする）", suf:"-ify / -fy", meaning:"simplify ＝ 単純化する"},
+
+  {cat:"動詞", sentence:"Supervisors must ____ each employee's performance every quarter.",
+   jp:"管理者は四半期ごとに各社員の業績を評価しなければならない。",
+   opts:["evaluation","evaluative","evaluate","evaluatively"], ans:2,
+   env:"助動詞 must の後ろ → 動詞の原形。",
+   pos:"動詞（行う）", suf:"-ate", meaning:"evaluate ＝ 評価する"},
+
+  {cat:"動詞", sentence:"The latest update will ____ the security of the network.",
+   jp:"最新の更新はネットワークのセキュリティを強化する。",
+   opts:["strength","strong","strongly","strengthen"], ans:3,
+   env:"助動詞 will の後ろ → 動詞。strength は名詞、strong は形容詞。",
+   pos:"動詞（〜にする）", suf:"-en", meaning:"strengthen ＝ 強化する"},
+
+  {cat:"動詞", sentence:"Please ____ your documents before submitting the report.",
+   jp:"レポート提出前に書類を整理してください。",
+   opts:["organization","organize","organized","organizational"], ans:1,
+   env:"Please で始まる命令文 → 動詞の原形。",
+   pos:"動詞（〜にする）", suf:"-ize", meaning:"organize ＝ 整理する・まとめる"},
+
+  {cat:"動詞", sentence:"The official memo should ____ the new vacation policy.",
+   jp:"公式メモは新しい休暇方針を明確にするべきだ。",
+   opts:["clear","clearly","clarify","clarity"], ans:2,
+   env:"助動詞 should の後ろ → 動詞の原形。clear は形容詞、「明確にする」の動詞は clarify が自然。",
+   pos:"動詞（〜にする）", suf:"-ify", meaning:"clarify ＝ 明確にする"},
+
+  /* ===== 形容詞 (6) ===== */
+  {cat:"形容詞", sentence:"The orientation provided ____ information for all new hires.",
+   jp:"オリエンテーションは新入社員全員に役立つ情報を提供した。",
+   opts:["use","useful","usefully","usefulness"], ans:1,
+   env:"名詞 information の直前 → 名詞を修飾する形容詞。",
+   pos:"形容詞（〜を持つ）", suf:"-ful", meaning:"useful ＝ 役立つ・有用な"},
+
+  {cat:"形容詞", sentence:"Our team designed a highly ____ marketing strategy.",
+   jp:"我々のチームは非常に効果的なマーケティング戦略を設計した。",
+   opts:["effect","effective","effectively","effectiveness"], ans:1,
+   env:"副詞 highly の後、名詞 strategy の前 → 形容詞。",
+   pos:"形容詞（性質を持つ）", suf:"-ive", meaning:"effective ＝ 効果的な"},
+
+  {cat:"形容詞", sentence:"Workplace safety remains a ____ issue for the factory.",
+   jp:"職場の安全は工場にとって重要な問題であり続けている。",
+   opts:["critic","critical","critically","criticize"], ans:1,
+   env:"冠詞 a と名詞 issue の間 → 形容詞。",
+   pos:"形容詞（〜の性質）", suf:"-ical", meaning:"critical ＝ 重要な・決定的な"},
+
+  {cat:"形容詞", sentence:"Customers report that our suppliers are extremely ____.",
+   jp:"顧客は我々の供給業者が非常に信頼できると報告している。",
+   opts:["rely","reliable","reliably","reliability"], ans:1,
+   env:"be動詞 are ＋ 副詞 extremely の後 → 補語になる形容詞。",
+   pos:"形容詞（〜できる）", suf:"-able", meaning:"reliable ＝ 信頼できる"},
+
+  {cat:"形容詞", sentence:"The quarterly report contains ____ data on consumer trends.",
+   jp:"四半期報告書には消費者動向に関する広範なデータが含まれている。",
+   opts:["extend","extensive","extensively","extension"], ans:1,
+   env:"動詞 contains の目的語、名詞 data の前 → 形容詞。",
+   pos:"形容詞（性質を持つ）", suf:"-ive", meaning:"extensive ＝ 広範な・大規模な"},
+
+  {cat:"形容詞", sentence:"We provide ____ customer support to every client worldwide.",
+   jp:"我々は世界中のすべての顧客に専門的なサポートを提供する。",
+   opts:["profession","professional","professionally","professionalism"], ans:1,
+   env:"名詞 customer support の前 → 修飾する形容詞。",
+   pos:"形容詞（〜の）", suf:"-al", meaning:"professional ＝ 専門的な・プロの"},
+
+  /* ===== 副詞 (6) ===== */
+  {cat:"副詞", sentence:"The construction project was completed ____ ahead of schedule.",
+   jp:"建設プロジェクトは予定よりも大幅に早く完了した。",
+   opts:["significant","significance","significantly","significative"], ans:2,
+   env:"動詞 completed と ahead を修飾 → 副詞。",
+   pos:"副詞（動詞・句を修飾）", suf:"-ly", meaning:"significantly ＝ 大幅に・著しく"},
+
+  {cat:"副詞", sentence:"The flight to Hong Kong takes ____ four hours from Tokyo.",
+   jp:"東京から香港までのフライトはおよそ4時間かかる。",
+   opts:["approximate","approximately","approximation","approximated"], ans:1,
+   env:"数値 four hours の前を修飾 → 副詞。",
+   pos:"副詞（数量を修飾）", suf:"-ly", meaning:"approximately ＝ およそ・約"},
+
+  {cat:"副詞", sentence:"The two finalists scored 92 and 88 points, ____.",
+   jp:"2人のファイナリストはそれぞれ92点と88点を獲得した。",
+   opts:["respective","respect","respectful","respectively"], ans:3,
+   env:"文末で全体を修飾 → 副詞。respective は形容詞。",
+   pos:"副詞（順序対応を示す）", suf:"-ly", meaning:"respectively ＝ それぞれ"},
+
+  {cat:"副詞", sentence:"Submit the form by Friday; ____, your application will be delayed.",
+   jp:"金曜までに用紙を提出してください。さもなければ申請は遅れます。",
+   opts:["other","others","otherwise","another"], ans:2,
+   env:"2文をつなぐ接続副詞の位置。「さもなければ」の意味。",
+   pos:"副詞（接続的に文を修飾）", suf:"-wise", meaning:"otherwise ＝ さもなければ・そうでなければ"},
+
+  {cat:"副詞", sentence:"To increase the volume, turn the dial ____.",
+   jp:"音量を上げるには、ダイヤルを時計回りに回してください。",
+   opts:["clock","clockwise","clocked","clocks"], ans:1,
+   env:"動詞 turn を修飾し「どの向きに」を示す → 副詞。",
+   pos:"副詞（方向を示す）", suf:"-wise", meaning:"clockwise ＝ 時計回りに"},
+
+  {cat:"副詞", sentence:"Despite the challenges, the firm performed ____ this quarter.",
+   jp:"困難にもかかわらず、その会社は今四半期効果的に業績を上げた。",
+   opts:["effective","effectiveness","effectively","effect"], ans:2,
+   env:"動詞 performed の後ろを修飾 → 副詞。",
+   pos:"副詞（動詞を修飾）", suf:"-ly", meaning:"effectively ＝ 効果的に・うまく"},
+];
+
+const KEYS=["A","B","C","D"];
+let pool=[], idx=0, score=0, answered=false, miss=[], byCat={};
+let currentMode = "all";
+
+// Interactive Features States
+let soundEnabled = true;
+let starredQuestions = []; // Array of indices mapping to QUESTIONS
+
+const $=id=>document.getElementById(id);
+
+// Load bookmarked list from localStorage safely
+function loadStarred() {
+  try {
+    const saved = localStorage.getItem('shimabata_starred_idx');
+    if (saved) {
+      starredQuestions = JSON.parse(saved);
+    }
+  } catch(e) {
+    starredQuestions = [];
+  }
+  updateStarredButtonVisibility();
+}
+
+function saveStarred() {
+  try {
+    localStorage.setItem('shimabata_starred_idx', JSON.stringify(starredQuestions));
+  } catch(e) {}
+  updateStarredButtonVisibility();
+}
+
+function updateStarredButtonVisibility() {
+  const btn = $("starredModeBtn");
+  const countLabel = $("starCountLabel");
+  if (starredQuestions.length > 0) {
+    btn.classList.remove("hide");
+    countLabel.textContent = `${starredQuestions.length}問`;
+  } else {
+    btn.classList.add("hide");
+  }
+}
+
+// Sound Synthesis using Web Audio API
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playBeep(isCorrect) {
+  if (!soundEnabled) return;
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  
+  if (isCorrect) {
+    // Elegant Correct Chime (C5 -> E5)
+    const osc1 = audioCtx.createOscillator();
+    const osc2 = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc1.connect(gainNode);
+    osc2.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.05);
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.8);
+    
+    osc1.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+    osc1.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.12); // E5
+    
+    osc2.frequency.setValueAtTime(1046.50, audioCtx.currentTime); // C6
+    osc2.frequency.setValueAtTime(1318.51, audioCtx.currentTime + 0.12); // E6
+    
+    osc1.start();
+    osc2.start();
+    osc1.stop(audioCtx.currentTime + 0.8);
+    osc2.stop(audioCtx.currentTime + 0.8);
+  } else {
+    // Gentle Double Buzz
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    osc.type = 'triangle';
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.05);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+    
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime + 0.18);
+    gainNode.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.23);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
+    
+    osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3
+    osc.frequency.setValueAtTime(180, audioCtx.currentTime + 0.18); // F3
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.4);
+  }
+}
+
+// Text to Speech Functionality
+function speakSentence(text) {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel(); // Stop current speech
+    
+    // Replace Blank line with clean pause indicator or blank text
+    const cleanText = text.replace("____", "[blank]");
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.85; // Natural student speed
+    
+    // Attempt to locate a high-quality US English voice
+    const voices = window.speechSynthesis.getVoices();
+    const preferredVoice = voices.find(voice => voice.lang === 'en-US' && voice.name.includes('Google')) || 
+                           voices.find(voice => voice.lang.startsWith('en-US')) || 
+                           voices.find(voice => voice.lang.startsWith('en'));
+    if (preferredVoice) {
+      utterance.voice = preferredVoice;
+    }
+    
+    showToast("音声読み上げ中...");
+    window.speechSynthesis.speak(utterance);
+  } else {
+    showToast("ご利用の端末は音声合成に非対応です");
+  }
+}
+
+function showToast(msg) {
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("active");
+  setTimeout(() => t.classList.remove("active"), 2000);
+}
+
+// Main Game Controller
+function start(mode){
+  currentMode = mode;
+  if(mode === "all") {
+    // Shuffle or slice normal pool
+    pool = QUESTIONS.slice();
+  } else if (mode === "starred") {
+    // Select starred ones
+    pool = QUESTIONS.filter((_, idx) => starredQuestions.includes(idx));
+  } else {
+    pool = QUESTIONS.filter(q=>q.cat===mode);
+  }
+  
+  if (pool.length === 0) {
+    showToast("ブックマークされた問題はありません");
+    return;
+  }
+
+  idx=0; score=0; miss=[]; byCat={};
+  $("start").classList.add("hide");
+  $("result").classList.add("hide");
+  $("quiz").classList.remove("hide");
+  render();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function getOriginalQuestionIndex(qObj) {
+  return QUESTIONS.findIndex(q => q.sentence === qObj.sentence);
+}
+
+function render(){
+  answered=false;
+  const q=pool[idx];
+  const origIndex = getOriginalQuestionIndex(q);
+  
+  // Update Bookmarked State UI
+  const starBtn = $("starBtn");
+  if (starredQuestions.includes(origIndex)) {
+    starBtn.classList.add("starred");
+  } else {
+    starBtn.classList.remove("starred");
+  }
+
+  $("cat").textContent=q.cat;
+  $("counter").textContent=`${idx+1} / ${pool.length}`;
+  $("bar").style.width=`${(idx)/pool.length*100}%`;
+  $("qnum").textContent=`QUESTION ${String(idx+1).padStart(2,"0")}`;
+  $("sentence").innerHTML=q.sentence.replace("____",'<span class="blank">?</span>');
+  $("jphint").textContent=q.jp;
+  
+  const box=$("options"); box.innerHTML="";
+  q.opts.forEach((w,i)=>{
+    const b=document.createElement("button");
+    b.className="opt";
+    b.innerHTML=`<span class="key">${KEYS[i]}</span><span>${w}</span>`;
+    b.onclick=()=>choose(i);
+    box.appendChild(b);
+  });
+  $("explain").style.display="none";
+  $("next").style.display="none";
+  
+  // Attach Event listener to speak button dynamically for this question
+  $("speakBtn").onclick = () => speakSentence(q.sentence);
+  
+  // Attach Event to Star Button
+  starBtn.onclick = () => toggleStar(origIndex);
+}
+
+function toggleStar(index) {
+  const starBtn = $("starBtn");
+  const starIdx = starredQuestions.indexOf(index);
+  if (starIdx > -1) {
+    starredQuestions.splice(starIdx, 1);
+    starBtn.classList.remove("starred");
+    showToast("ブックマークを解除しました");
+  } else {
+    starredQuestions.push(index);
+    starBtn.classList.add("starred");
+    showToast("ブックマークに登録しました ⭐");
+  }
+  saveStarred();
+}
+
+function choose(i){
+  if(answered)return; answered=true;
+  const q=pool[idx];
+  const btns=[...$("options").children];
+  const isCorrect = (i===q.ans);
+  
+  // Play correct or incorrect sound chime
+  playBeep(isCorrect);
+
+  btns.forEach((b,j)=>{
+    b.disabled=true;
+    if(j===q.ans) b.classList.add("correct");
+    else if(j===i){ b.classList.add("wrong"); }
+    else b.classList.add("dim");
+  });
+  
+  if(isCorrect){
+    btns[i].insertAdjacentHTML("beforeend",'<span class="mark">✓</span>');
+    score++;
+  }else{
+    btns[i].insertAdjacentHTML("beforeend",'<span class="mark">✕</span>');
+    miss.push({q:q.sentence, chosen:q.opts[i], correct:q.opts[q.ans], cat:q.cat});
+  }
+  byCat[q.cat]=byCat[q.cat]||{c:0,t:0};
+  byCat[q.cat].t++; if(i===q.ans) byCat[q.cat].c++;
+
+  const ok=isCorrect;
+  const ex=$("explain");
+  ex.className="explain "+(ok?"ok":"ng");
+  $("exhead").textContent=ok?"正解！接尾辞で見抜けたね 🎯":"惜しい！ここを押さえよう";
+  $("exenv").textContent=q.env;
+  $("expos").textContent=q.pos;
+  $("exsuf").innerHTML=`<span class="suf">${q.suf}</span> が目印 → 正解は <b>${q.opts[q.ans]}</b>`;
+  $("exmean").textContent=q.meaning;
+  ex.style.display="block";
+  $("bar").style.width=`${(idx+1)/pool.length*100}%`;
+  $("next").textContent = idx+1<pool.length ? "次の問題 →" : "結果を見る →";
+  $("next").style.display="block";
+}
+
+$("next").onclick=()=>{
+  if(idx+1<pool.length){ idx++; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+  else finish();
+};
+
+function finish(){
+  $("quiz").classList.add("hide");
+  $("result").classList.remove("hide");
+  const total=pool.length, pct=Math.round(score/total*100);
+  $("scoreNum").textContent=`${score}`;
+  $("scorePct").textContent=`/ ${total}　${pct}%`;
+  const circ=389.6, off=circ*(1-pct/100);
+  const ring=$("ring");
+  ring.style.transition="stroke-dashoffset 1s ease";
+  ring.style.stroke = pct>=80?"#3f6b4a":pct>=60?"#b8862f":"#c0492e";
+  setTimeout(()=>ring.style.strokeDashoffset=off,80);
+
+  let v,vs;
+  if(pct>=90){v="即断レベル 💎";vs="接尾辞が完全に体に定着しています。本番でもPart 5を一瞬で解ききれるはずです。";}
+  else if(pct>=70){v="合格点まであと一歩 🔥";vs="品詞の判断力は良好です。間違えた接尾辞をマスターシートで再確認しましょう。";}
+  else if(pct>=50){v="ここから伸びる伸びしろ大 📈";vs="【①環境 → ②必要品詞 → ③接尾辞】の3つの鉄則ステップを意識して反復練習しましょう。";}
+  else{v="まずは型を覚えることから 🌱";vs="焦らなくて大丈夫。接尾辞一覧シートを横に開き、1問ずつ確実に確認していきましょう。";}
+  $("verdict").textContent=v; $("verdictSub").textContent=vs;
+
+  const bd=$("breakdown"); bd.innerHTML="";
+  ["名詞","動詞","形容詞","副詞"].forEach(c=>{
+    if(!byCat[c])return;
+    const d=document.createElement("div"); d.className="bd";
+    d.innerHTML=`<div class="c">${c}</div><div class="s">${byCat[c].c}/${byCat[c].t}</div>`;
+    bd.appendChild(d);
+  });
+
+  const rv=$("review");
+  if(miss.length===0){
+    rv.innerHTML=`<div class="allgood">全問正解！素晴らしい、文句なしです 🎉</div>`;
+  }else{
+    rv.innerHTML=`<h3>復習ポイント（${miss.length}問）</h3>`+
+      miss.map(m=>`<div class="miss"><div class="q">[${m.cat}] ${m.q}</div>
+      <div class="ans">正解 <b>${m.correct}</b>　／　選んだ答え <s>${m.chosen}</s></div></div>`).join("");
+  }
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// Event Listeners for UI control panels
+$("toggleSound").onclick = () => {
+  soundEnabled = !soundEnabled;
+  if (soundEnabled) {
+    $("soundOnIcon").classList.remove("hide");
+    $("soundOffIcon").classList.add("hide");
+    $("soundText").textContent = "音ON";
+    showToast("効果音をオンにしました");
+  } else {
+    $("soundOnIcon").classList.add("hide");
+    $("soundOffIcon").classList.remove("hide");
+    $("soundText").textContent = "消音";
+    showToast("効果音をオフにしました");
+  }
+};
+
+const modal = $("sheetModal");
+$("openSheet").onclick = () => {
+  modal.classList.add("active");
+};
+$("closeSheet").onclick = () => {
+  modal.classList.remove("active");
+};
+// Close modal on gray area click
+modal.onclick = (e) => {
+  if (e.target === modal) modal.classList.remove("active");
+};
+
+// Start Buttons Binding
+document.querySelectorAll(".mode-btn").forEach(b=>{
+  if (b.id !== "starredModeBtn") {
+    b.onclick=()=>start(b.dataset.mode);
+  }
+});
+$("starredModeBtn").onclick = () => start("starred");
+
+$("retry").onclick=()=>start(currentMode);
+$("home").onclick=()=>{
+  $("result").classList.add("hide");
+  $("start").classList.remove("hide");
+  // Update Bookmarks state UI on returning home
+  updateStarredButtonVisibility();
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+// Initialize State
+window.onload = () => {
+  loadStarred();
+  // Warm up speechSynthesis on click to bypass browser safety rules
+  document.body.addEventListener('click', () => {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  }, { once: true });
+};
+</script>
+</body>
+</html>
